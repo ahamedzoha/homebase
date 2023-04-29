@@ -1,4 +1,15 @@
-import './globals.css'
+import "./globals.css"
+import { Nunito } from "next/font/google"
+
+export const metadata = {
+  title: "HomeBase",
+  description: "HomeBase is a temporary home for your vacation rental.",
+  icons: {
+    icon: "/favicon.ico",
+  },
+}
+
+const font = Nunito({ subsets: ["latin"] })
 
 export default function RootLayout({
   children,
@@ -7,12 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
-      <head />
-      <body>{children}</body>
+      <body className={font.className}>{children}</body>
     </html>
   )
 }
