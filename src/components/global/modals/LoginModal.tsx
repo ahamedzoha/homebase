@@ -57,6 +57,31 @@ const LoginModal = () => {
       })
   }
 
+  const socialLogin = useCallback(
+    (provider: string) => {
+      setIsLoading(true)
+      signIn(provider)
+        .then((callback) => {
+          if (callback?.ok) {
+            toast.success(`Welcome!`)
+            loginModal.onClose()
+          }
+
+          if (callback?.error) {
+            toast.error(callback.error)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          toast.error(`Something went wrong!`)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    },
+    [loginModal]
+  )
+
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
@@ -90,13 +115,13 @@ const LoginModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => socialLogin("google")}
       />
       <Button
         outline
         label="Continue with GitHub"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => socialLogin("github")}
       />
       <div
         className="

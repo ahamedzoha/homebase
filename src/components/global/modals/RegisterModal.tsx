@@ -10,6 +10,7 @@ import Heading from "../Heading"
 import Input from "../inputs/Input"
 import { toast } from "react-hot-toast"
 import Button from "@/components/Button"
+import { signIn } from "next-auth/react"
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal()
@@ -42,6 +43,31 @@ const RegisterModal = () => {
         setIsLoading(false)
       })
   }
+
+  const socialLogin = useCallback(
+    (provider: string) => {
+      setIsLoading(true)
+      signIn(provider)
+        .then((callback) => {
+          if (callback?.ok) {
+            toast.success(`Welcome!`)
+            registerModal.onClose()
+          }
+
+          if (callback?.error) {
+            toast.error(callback.error)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          toast.error(`Something went wrong!`)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    },
+    [registerModal]
+  )
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -81,13 +107,13 @@ const RegisterModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => socialLogin("google")}
       />
       <Button
         outline
         label="Continue with GitHub"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => socialLogin("github")}
       />
       <div
         className="
