@@ -1,8 +1,8 @@
 import Navbar from "@/components/global/navbar/Navbar"
 import "./globals.css"
 import { Nunito } from "next/font/google"
-import Modal from "@/components/global/modals/Modal"
 import RegisterModal from "@/components/global/modals/RegisterModal"
+import ToasterProvider from "@/providers/ToasterProvider"
 
 export const metadata = {
   title: "HomeBase",
@@ -22,7 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <RegisterModal isOpen title="Hello" actionLabel="Submit" />
+        <ToasterProvider />
+        <RegisterModal />
         <Navbar />
         {children}
       </body>
