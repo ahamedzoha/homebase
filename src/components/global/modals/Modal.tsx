@@ -59,6 +59,7 @@ const Modal: FC<ModalProps> = ({
   return (
     <>
       <div
+        // onClick={handleClose}
         className="
           justify-center 
           items-center 
@@ -113,6 +114,7 @@ const Modal: FC<ModalProps> = ({
                 bg-white
                 outline-none
                 focus:outline-none
+                z-50
               "
             >
               {/* header */}
