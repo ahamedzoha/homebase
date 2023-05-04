@@ -14,7 +14,7 @@ interface ImageUploadProps {
 }
 const ImageUpload: FC<ImageUploadProps> = ({ onChange, value }) => {
   const handleUpload = useCallback(
-    (error: any, result: any) => {
+    (result: any) => {
       onChange(result.info.secure_url)
     },
     [onChange]
@@ -23,14 +23,15 @@ const ImageUpload: FC<ImageUploadProps> = ({ onChange, value }) => {
   return (
     <CldUploadWidget
       onUpload={handleUpload}
-      uploadPreset=""
+      uploadPreset="jxncgvvx"
+      // signatureEndpoint={process.env.NEXT_PUBLIC_CLOUDINARY_SIGNATURE_ENDPOINT}
       options={{
         maxFiles: 1,
       }}
     >
       {({ open }) => (
         <div
-          onClick={() => open?.()}
+          onClick={() => open()}
           className="
             relative 
             cursor-pointer 
