@@ -59,4 +59,6 @@ export async function DELETE(
       favoriteIds,
     },
   })
+
+  return NextResponse.json(user)
 }
