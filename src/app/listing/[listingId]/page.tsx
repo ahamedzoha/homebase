@@ -2,6 +2,7 @@ import getCurrentUser from "@/actions/getCurrentUser"
 import getListingById from "@/actions/getListingById"
 import EmptyState from "@/components/global/EmptyState"
 import ListingClient from "./ListingClient"
+import getReservations from "@/actions/getReservations"
 
 interface IParams {
   listingId?: string
@@ -9,6 +10,7 @@ interface IParams {
 const ListingPage = async ({ params }: { params: IParams }) => {
   const listing = await getListingById(params)
   const currentUser = await getCurrentUser()
+  const reservations = await getReservations(params)
 
   if (!listing) {
     return (
@@ -19,7 +21,13 @@ const ListingPage = async ({ params }: { params: IParams }) => {
       />
     )
   }
-  return <ListingClient listing={listing} currentUser={currentUser} />
+  return (
+    <ListingClient
+      reservations={reservations}
+      listing={listing}
+      currentUser={currentUser}
+    />
+  )
 }
 
 export default ListingPage
