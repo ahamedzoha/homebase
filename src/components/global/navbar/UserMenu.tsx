@@ -111,7 +111,12 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
                   }}
                   label="My Reservations"
                 />
-                <MenuItem onClick={() => {}} label="My Properties" />
+                <MenuItem
+                  onClick={() => {
+                    router.push("/properties")
+                  }}
+                  label="My Properties"
+                />
                 <MenuItem
                   onClick={rentModal.onOpen}
                   label="Become a HomeBaser"

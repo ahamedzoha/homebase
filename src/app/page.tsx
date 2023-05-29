@@ -1,12 +1,16 @@
 import getCurrentUser from "@/actions/getCurrentUser"
-import getListings from "@/actions/getListings"
+import getListings, { IListingParams } from "@/actions/getListings"
 import Container from "@/components/global/Container"
 import EmptyState from "@/components/global/EmptyState"
 import ListingCard from "@/components/global/Listings/ListingCard"
 import { Listing } from "@prisma/client"
 
-export default async function Home() {
-  const listings = await getListings()
+export interface HomeProps {
+  searchParams: IListingParams
+}
+
+const Home = async ({ searchParams }: HomeProps) => {
+  const listings = await getListings(searchParams)
   const currentUser = await getCurrentUser()
 
   if (listings.length === 0) {
@@ -38,3 +42,5 @@ export default async function Home() {
     </Container>
   )
 }
+
+export default Home
